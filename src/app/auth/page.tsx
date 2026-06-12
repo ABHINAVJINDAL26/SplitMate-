@@ -9,6 +9,7 @@ export default function AuthPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -100,18 +101,46 @@ export default function AuthPage() {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ position: 'relative' }}>
             <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              className="form-input"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div style={{ position: 'relative' }}>
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                className="form-input"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{ width: '100%', paddingRight: '45px' }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  outline: 'none',
+                }}
+                title={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? '👁️' : '👁️‍🗨️'}
+              </button>
+            </div>
           </div>
+
+          {!isLogin && (
+            <div style={styles.requirementTip}>
+              🔑 <strong>Password requirements:</strong> Minimum 8 characters, at least 1 uppercase, 1 lowercase, 1 number, and 1 special symbol.
+            </div>
+          )}
 
           {error && <div style={styles.error}>{error}</div>}
 
@@ -126,6 +155,7 @@ export default function AuthPage() {
             onClick={() => {
               setIsLogin(!isLogin);
               setError('');
+              setPassword('');
             }}
             style={styles.toggleBtn}
           >
@@ -210,6 +240,17 @@ const styles: Record<string, React.CSSProperties> = {
   form: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  requirementTip: {
+    background: 'rgba(255, 255, 255, 0.02)',
+    border: '1px solid var(--border-glass)',
+    borderRadius: 'var(--radius-sm)',
+    padding: '10px 12px',
+    marginBottom: '20px',
+    fontSize: '12px',
+    color: 'var(--text-muted)',
+    lineHeight: '1.45',
+    textAlign: 'left',
   },
   submitBtn: {
     marginTop: '10px',

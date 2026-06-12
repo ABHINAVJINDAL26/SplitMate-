@@ -943,6 +943,37 @@ export default function DashboardPage() {
         <ProfileModal
           user={profileUser}
           groupsCount={profileGroupsCount}
+          isCurrentUser={currentUser !== null && profileUser.id === currentUser.id}
+          onUpdate={(updatedUser) => {
+            if (currentUser && updatedUser.id === currentUser.id) {
+              setCurrentUser(updatedUser);
+            }
+            // Update user references in groups state
+            setGroups(groups.map((g) => ({
+              ...g,
+              members: g.members.map((m) => m.user.id === updatedUser.id ? { ...m, user: updatedUser } : m)
+            })));
+            // Update user references in transactions
+            setTransactions(transactions.map((t) => {
+              const updatedPaidBy = t.paidBy.id === updatedUser.id ? updatedUser : t.paidBy;
+              const updatedReceivedBy = t.receivedBy?.id === updatedUser.id ? updatedUser : t.receivedBy;
+              const updatedSplits = t.splits?.map((s) => s.userId === updatedUser.id ? { ...s, user: updatedUser } : s);
+              return {
+                ...t,
+                paidBy: updatedPaidBy,
+                receivedBy: updatedReceivedBy,
+                splits: updatedSplits,
+              };
+            }));
+            // Update user references in global balances summary list
+            if (globalBalances?.summary) {
+              setGlobalBalances({
+                ...globalBalances,
+                summary: globalBalances.summary.map((s) => s.user.id === updatedUser.id ? { ...s, user: updatedUser } : s)
+              });
+            }
+            setProfileUser(updatedUser);
+          }}
           onClose={() => {
             setShowProfileModal(false);
             setProfileUser(null);
