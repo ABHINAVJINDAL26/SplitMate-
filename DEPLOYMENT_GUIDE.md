@@ -19,7 +19,7 @@ Aap niche diye gaye steps ko direct follow karke copy-paste kar sakte hain.
      ```env
      postgresql://postgres:[YOUR-PASSWORD]@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true
      ```
-   * *Note: `[YOUR-PASSWORD]` ki jagah wo password likhein jo apne abhi create kiya tha.*
+   * *Note: `[YOUR-PASSWORD]` ki jagah wo password likhein jo apne abhi create kiya tha. Agar aapke password me `@` jaisa special character hai, to use URL-encode karein (jaise `@` ko `%40` me badlein).*
 
 ---
 
