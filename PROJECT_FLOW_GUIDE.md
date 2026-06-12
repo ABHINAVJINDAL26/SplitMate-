@@ -163,13 +163,34 @@ Jab aap Group History timeline me kisi bhi expense/settlement card par click kar
 
 ---
 
-## 9. User Profile Modal (Sidebar Click)
-Left sidebar me niche user card section par click karne se ek sleek glassmorphic modal popup hota hai:
-*   **Profile Image (Avatar)**: Aapka dicebear avatar.
+## 9. User Profile Modal & Avatar Selection (Sidebar Click)
+Left sidebar me niche user card section par, ya pure app me kisi bhi member ke avatar/name par click karne se ek sleek glassmorphic modal popup hota hai:
+*   **Profile Image (Avatar)**: Aapka active avatar picture.
 *   **Details List**:
-    *   *Full Name*: Aapka account user-name.
-    *   *Email Address*: Aapka account email.
-    *   *Member Since*: Aapne kab register kiya tha (date).
-    *   *Joined Groups*: Aap total kitne groups ke member ho (e.g. `2 groups`).
-*   **Action**: "Close Profile" button click karne par modal overlay band ho jayega.
+    *   *Full Name*: User-name.
+    *   *Email Address*: Account email.
+    *   *Member Since*: User ke register karne ki date.
+    *   *Joined Groups*: User total kitne groups ka member hai (is dynamic tag me data ab clear dikhega).
+*   **Edit Profile Feature (Self Only)**:
+    *   Agar aap khud ki profile dekh rahe hain, to modal me `✏️ Edit Profile` button dikhta hai.
+    *   Is button par click karne se edit form khul jata hai jaha aap:
+        1.  `Full Name` edit kar sakte hain.
+        2.  `Pre-defined Cartoon Avatar Characters`: 8 standard interactive avatar characters (Cute bots, Adventurers, Anime Boy/Girl, retro pixel art, etc.) me se single click par avatar choose kar sakte hain.
+        3.  `Custom Avatar Image URL`: Predefined character choose karne ke bajaye aap khud ka custom picture URL bhi text-box me input kar sakte hain (e.g. dynamic profile pictures ya direct links).
+    *   `Save Changes` click karne par changes database update hokar local page state me instant sync ho jate hain, jisse aapka updated avatar pure group members, comments, aur sidebar list me instantly dikhne lagta hai.
+*   **Action**: `Close Profile` aur `Cancel` inputs modal dismiss karne ke liye hain.
+
+---
+
+## 10. Login / SignUp Professional Security Features
+App ke authentication module ko extreme tight security aur enterprise compliance ke hisab se design kiya gaya hai:
+1.  **Email Validation**: Domain format regex verification check kiya jata hai taaki koi fake email address na enter ho sake.
+2.  **Strict Password Strength Rules**: Naya account banate (Sign Up) samay strong validation filter check kiya jata hai:
+    *   Minimum **8 characters** length honi chahiye.
+    *   Kam se kam **1 uppercase letter** (A-Z) hona chahiye.
+    *   Kam se kam **1 lowercase letter** (a-z) hona chahiye.
+    *   Kam se kam **1 number** (0-9) hona chahiye.
+    *   Kam se kam **1 special character symbol** (e.g. `@`, `$`, `!`, `%`, `*`, `?`, `&`) hona chahiye.
+    *   Rules se match na karne par instantly frontend warning error message box show hota hai.
+3.  **Password Show/Hide Toggle (👁️ / 👁️‍🗨️ icon)**: Password text fields ke clear visibility safety click action icons diye gaye hain taaki types handle karne me password leakage aur typing mistakes na hon.
 
