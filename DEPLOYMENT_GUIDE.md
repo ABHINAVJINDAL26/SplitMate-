@@ -39,19 +39,15 @@ Aap niche diye gaye steps ko direct follow karke copy-paste kar sakte hain.
 
 ---
 
-### Step 3: Initialize Database (Tables & Seed Data)
-Aapka project deploy hone ke baad, database me tables aur start data (Alice, Bob, Charlie seed accounts) initialize karne ke liye apne local terminal me baseline setup command run karein:
+### Step 3: Automatic Database Initialization
+Aapka project deploy hote hi, Vercel **automatically** database me empty tables schema push kar deta hai (chuki build script me `prisma db push` integrated hai).
 
-1. Tables push karne ke liye:
-   ```bash
-   npx prisma db push
-   ```
-2. Demo users create karne ke liye:
-   ```bash
-   npx prisma db seed
-   ```
+Isliye aapko manual tables push karne ki koi zarurat nahi hai! Database bilkul **fresh aur empty** (bina seed data ke) live ready ho jayega.
 
-Aapki application live hai aur secure logging systems ready hain!
+*Note: Agar aap test/showcase ke liye seed demo data (Alice, Bob, Charlie) manually insert karna chahte hain, to apne local computer ke terminal se ye run kar sakte hain:*
+```bash
+npx prisma db seed
+```
 
 ---
 
